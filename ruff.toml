@@ -1,0 +1,31 @@
+[lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # PyFlakes
+    "C",   # McCabe complexity
+    "B",   # flake8-bugbear
+    "A",   # flake8-builtins
+    "COM", # flake8-commas
+    "C4",  # flake8-comprehensions
+    "ERA", # flake8-eradicate
+    "ICN", # flake8-import-conventions
+    "INP", # flake8-implicit-str-concat
+    "ISC", # flake8-implicit-str-concat
+    "TID", # flake8-tidy-imports
+    "Q",   # flake8-quotes
+    "S",   # flake8-bandit (безопасность)
+    "TCH", # flake8-type-checking
+    "INT", # flake8-gettext
+    "I",   # isort
+    "N",   # pep8-naming
+    "PLE", # pylint errors
+    "PLW", # pylint warnings
+    "TRY", # tryceratops
+    "RUF", # ruff-specific rules
+]
+ignore = [
+    "D203", "D211",      # конфликтующие правила blank lines
+    "D212", "D213",      # конфликтующие правила docstrings
+    "E501",              # длина строки
+]

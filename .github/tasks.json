@@ -1,0 +1,98 @@
+{
+  "tasks": [
+    {
+      "id": "task_01",
+      "name": "Задача 1: Представление",
+      "file": "task_01.py",
+      "max_score": 30,
+      "tests": [
+        {
+          "name": "Василий",
+          "input": "Василий\n35\nСамара",
+          "expected_output": "Меня зовут Василий, мне 35 лет, я живу в Самара.",
+          "comparison_method": "exact",
+          "max_score": 10
+        },
+        {
+          "name": "Пётр",
+          "input": "Пётр\n30\nВладивосток",
+          "expected_output": "Меня зовут Пётр, мне 30 лет, я живу в Владивосток.",
+          "comparison_method": "exact",
+          "max_score": 10
+        },
+        {
+          "name": "Анастасия",
+          "input": "Анастасия\n20\nСанкт-Петербург",
+          "expected_output": "Меня зовут Анастасия, мне 20 лет, я живу в Санкт-Петербург.",
+          "comparison_method": "exact",
+          "max_score": 10
+        }
+      ]
+    },
+    {
+      "id": "task_02",
+      "name": "Задача 2: Удвоение",
+      "file": "task_02.py",
+      "max_score": 30,
+      "tests": [
+        {
+          "name": "Удвоение 9",
+          "input": "9",
+          "expected_output": "9 * 2 = 18",
+          "comparison_method": "exact",
+          "max_score": 10
+        },
+        {
+          "name": "Удвоение 23",
+          "input": "23",
+          "expected_output": "23 * 2 = 46",
+          "comparison_method": "exact",
+          "max_score": 10
+        },
+        {
+          "name": "Удвоение 2417",
+          "input": "2417",
+          "expected_output": "2417 * 2 = 4834",
+          "comparison_method": "exact",
+          "max_score": 10
+        }
+      ]
+    },
+    {
+      "id": "task_03",
+      "name": "Задача 3: Конвертер секунд",
+      "file": "task_03.py",
+      "max_score": 40,
+      "tests": [
+        {
+          "name": "150 seconds",
+          "input": "150",
+          "expected_output": "150 секунд - это 2 минут и 30 секунд.",
+          "comparison_method": "exact",
+          "max_score": 10
+        },
+        {
+          "name": "600 seconds",
+          "input": "600",
+          "expected_output": "600 секунд - это 10 минут и 0 секунд.",
+          "comparison_method": "exact",
+          "max_score": 10
+        },
+        {
+          "name": "895 seconds",
+          "input": "895",
+          "expected_output": "895 секунд - это 14 минут и 55 секунд.",
+          "comparison_method": "exact",
+          "max_score": 10
+        },
+        {
+          "name": "3333 seconds",
+          "input": "3333",
+          "expected_output": "3333 секунд - это 55 минут и 33 секунд.",
+          "comparison_method": "exact",
+          "max_score": 10
+        }
+      ]
+    }
+  ]
+}
