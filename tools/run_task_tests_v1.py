@@ -5,23 +5,6 @@ import sys
 import os
 import base64
 
-def compare_exact(actual, expected):
-    return actual.strip() == expected.strip()
-
-def compare_contains(actual, expected):
-    return expected.strip() in actual.strip()
-
-def compare_lines_unordered(actual, expected):
-    """Сравнение строк без учёта порядка (игнорируя пустые строки)"""
-    actual_lines = [line.strip() for line in actual.strip().splitlines() if line.strip()]
-    expected_lines = [line.strip() for line in expected.strip().splitlines() if line.strip()]
-    return sorted(actual_lines) == sorted(expected_lines)
-
-def compare_regex(actual, expected):
-    """Сравнение через регулярное выражение"""
-    import re
-    return bool(re.search(expected.strip(), actual.strip(), re.MULTILINE))
-
 def run_test(command, input_str, expected, method, timeout=5):
     try:
         proc = subprocess.run(
@@ -32,29 +15,18 @@ def run_test(command, input_str, expected, method, timeout=5):
             timeout=timeout,
             shell=True
         )
-        actual = proc.stdout
-        stderr = proc.stderr.strip()
+        actual = proc.stdout.strip()
+        stderr = proc.stderr
 
-        # Выбор метода сравнения
         if method == "exact":
-            passed = compare_exact(actual, expected)
+            passed = actual == expected
         elif method == "contains":
-            passed = compare_contains(actual, expected)
-        elif method == "lines_unordered":
-            passed = compare_lines_unordered(actual, expected)
-        elif method == "regex":
-            passed = compare_regex(actual, expected)
+            passed = expected in actual
         else:
-            return {
-                "name": "",
-                "status": "fail",
-                "score": 0,
-                "max_score": 1,
-                "output": f"Неизвестный метод сравнения: {method}"
-            }
+            passed = False
 
         score = 1 if passed else 0
-        output = actual.strip()
+        output = actual
         if stderr and not passed:
             output += f"\nSTDERR: {stderr}"
 
@@ -117,7 +89,7 @@ def main():
                     "status": "fail",
                     "score": 0,
                     "max_score": test["max_score"],
-                    "output": f"SyntaxError\n{e.stderr.decode(errors='ignore')}"
+                    "output": f"SyntaxError\n{e.stderr.decode()}"
                 })
         else:
             command = f"{sys.executable} {file_path}"
@@ -143,11 +115,7 @@ def main():
     }
 
     encoded = base64.b64encode(json.dumps(result, ensure_ascii=False).encode("utf-8")).decode("utf-8")
-    # Современный синтаксис для GitHub Actions (set-output deprecated)
     print(f"::set-output name=result::{encoded}")
-    # Альтернатива для новых версий:
-    # with open(os.environ.get('GITHUB_OUTPUT', '/dev/null'), 'a') as f:
-    #     f.write(f"result={encoded}\n")
 
 if __name__ == "__main__":
     main()
